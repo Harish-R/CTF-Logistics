@@ -1,0 +1,17 @@
+<%  if session[:user_id]
+    # if session exist then, display the page
+%>
+
+  <%= flash[:notice] %>
+  <br>
+  <h2> User dashboard </h2>
+  <%= link_to "Log out", :controller => 'users', :action => 'logout' %>
+  <%
+    # List all the items requested and approved for the
+    # team for which the user belongs to
+  %>
+<%  elsif
+    # if session doesnot exist, tell to login from home page
+%>
+  <p> Please login from home page </p>
+<% end %>
