@@ -10,6 +10,23 @@
     # List all the items requested and approved for the
     # team for which the user belongs to
   %>
+  <table>
+    <tr>
+      <th> Item </th>
+      <th> Requested </th>
+      <th> Approved </th>
+      <th> Total </th>
+    </tr>
+    <% @requests.each do |request| %>
+        <tr>
+          <% item = Item.where(:id => request.product_id) %>
+          <th> <%= item.item_name %> </th>
+          <th> <%= request.requested %> </th>
+          <th> <%= request.approved %> </th>
+          <th> <%= item.item_total %> </th>
+        </tr>
+    <% end %>
+  </table>
 
 <%  elsif
     # if session doesnot exist, tell to login from

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   def index
     # if session exists, then
-    if session[:user_id]
+    if session[:user_id] != nil
       # if user is admin redirect to admin_dashboard
       if session[:user_type] == "admin"
           redirect_to(:controller => 'items', :action => 'admin_dashboard')
@@ -12,7 +12,6 @@ class UsersController < ApplicationController
       end
     end
     # else do nothing, display normal index page
-    return true
   end
 
   def login
@@ -27,11 +26,12 @@ class UsersController < ApplicationController
       session[:user_id] = found_user.id
       session[:user_name] = found_user.user_name
       session[:user_team] = found_user.user_team
+      session[:user_type] = found_user.user_type
       if found_user.user_type == "admin"
-        flash[:notice] = "You are now logged in."
+        # flash[:notice] = "You are now logged in."
         redirect_to(:controller => 'items', :action => 'admin_dashboard')
       else
-        flash[:notice] = "You are now logged in."
+        # flash[:notice] = "You are now logged in."
         redirect_to(:controller => 'items', :action => 'user_dashboard')
       end
     else

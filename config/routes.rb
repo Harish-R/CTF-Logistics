@@ -1,18 +1,29 @@
 CTFLogistics::Application.routes.draw do
 
-  get "items/create"
-  get "items/add"
+  # resources :items
+
+  get "items/create" => 'items#create'
+  post "items/create" => 'items#create'
+  get "items/add" => 'items#add'
+  post "items/add" => 'items#add'
   get "items/destroy"
   get "items/update"
+  post "items/update"
   get "items/plus"
   get "items/minus"
+
+  get 'items/user_dashboard' => 'items#user_dashboard'
+  get 'items/admin_dashboard' => 'items#admin_dashboard'
+
   match ':controller(/:action(/:id))', :via => [:get]
+  match ':controller(/:action(/:id))', :via => [:post]
 
   get "users/index"
   post "users/login"
   get "users/logout"
   get "users/new"
   get "users/destroy"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
