@@ -19,7 +19,7 @@
     </tr>
     <% @requests.each do |request| %>
         <tr>
-          <% item = Item.where(:id => request.product_id) %>
+          <% item = Item.where(:id => request.item_id) %>
           <th> <%= item.item_name %> </th>
           <th> <%= request.requested %> </th>
           <th> <%= request.approved %> </th>

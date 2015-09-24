@@ -6,6 +6,8 @@ CTFLogistics::Application.routes.draw do
   post "items/create" => 'items#create'
   get "items/add" => 'items#add'
   post "items/add" => 'items#add'
+  get 'items/approve' => 'items#approve'
+  get 'items/approve' => 'items#approve'
   get "items/destroy"
   get "items/update"
   post "items/update"

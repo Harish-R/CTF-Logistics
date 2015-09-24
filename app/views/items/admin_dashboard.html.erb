@@ -1,8 +1,5 @@
-<p> Hello </p>
 <% if session[:user_id] %>
 
-  <%= flash[:notice] %>
-  <br>
   <h2> Admin dashboard </h2>
   <%= link_to "Log out", :controller => 'users', :action => 'logout' %>
 
@@ -52,19 +49,36 @@
     </tr>
     <% @items.each do |item| %>
     <tr>
-      <td> <%= item.item_name %> </td>
+      <td> <%= link_to item.item_name, '/items/list_by_item?item_id=' + String(item.id) %> </td>
       <td> <%= item.item_total %> </td>
       <td> <%= item.item_requested %> </td>
       <td> <%= item.item_approved %> </td>
       <td> <%= item.item_remaining %> </td>
-      <td> <%= link_to "Total+", :controller => 'items', :action => 'update', :id => item.id %> </td>
-      <td> <%= link_to "Total-", :controller => 'items', :action => 'update', :id => item.id %> </td>
+      <td>
+        <%= form_tag(:action => 'total') do %>
+          <%= number_field_tag('number', params[:number], :placeholder => '+ Number') %>
+          <%= hidden_field_tag('item_id', params[:item_id] = item.id) %>
+          <%= hidden_field_tag('task', params[:task] = 'plus') %>
+          <%= submit_tag('Increase Total') %>
+        <% end %>
+      </td>
+      <td>
+        <%= form_tag(:action => 'total') do %>
+          <%= number_field_tag('number', params[:number], :placeholder => '- Number') %>
+          <%= hidden_field_tag('item_id', params[:item_id] = item.id) %>
+          <%= hidden_field_tag('task', params[:task] = 'minus') %>
+          <%= submit_tag('Reduce Total') %>
+        <% end %>
+      </td>
       <td> <%= link_to "Delete", :controller => 'items', :action => 'destroy', :id => item.id %> </td>
     </tr>
     <% end %>
   </table>
   <% end %>
-
+  <p></p>
+  <p></p>
+  <br>
+  <%= link_to "List by Team", '/items/list_by_team' %>
 <% elsif %>
 
   <p> Please login from home page </p>
